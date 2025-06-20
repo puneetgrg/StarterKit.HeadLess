@@ -19,8 +19,8 @@ namespace StarterKit.HeadLess.Web.Filters.Pages
         private static readonly EPiServer.Logging.ILogger _logger = LogManager.GetLogger(typeof(StartPageApiModelFilter));
 
         public StartPageApiModelFilter(IContentLoader contentLoader, ISEOManager seoManager, IBlockViewModelBuilder blockViewModelBuilder,
-            IDisplayViewModelBuilder displayViewModelBuilder , IBreadcrumbViewModelBuilder breadcrumbViewModelBuilder) :
-            base(contentLoader, seoManager, blockViewModelBuilder , breadcrumbViewModelBuilder)
+            IDisplayViewModelBuilder displayViewModelBuilder , IBreadcrumbViewModelBuilder breadcrumbViewModelBuilder , IPageViewModelBuilder pageViewModelBuilder) :
+            base(contentLoader, seoManager, blockViewModelBuilder , breadcrumbViewModelBuilder , pageViewModelBuilder)
         {
             _contentLoader = contentLoader;
             _displayViewModelBuilder = displayViewModelBuilder;

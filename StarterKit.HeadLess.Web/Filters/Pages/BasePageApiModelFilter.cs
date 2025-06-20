@@ -19,15 +19,17 @@ namespace StarterKit.HeadLess.Web.Filters.Pages
         private readonly IBlockViewModelBuilder _blockViewModelBuilder;
         private readonly IBreadcrumbViewModelBuilder _breadcrumbViewModelBuilder;
 
-        //private readonly IPageViewModelBuilder _pageViewModelBuilder;
+        private readonly IPageViewModelBuilder _pageViewModelBuilder;
         //private readonly IFormsViewModelBuilder _formsViewModelBuilder;
 
-        public BasePageApiModelFilter(IContentLoader contentLoader, ISEOManager seoManager, IBlockViewModelBuilder blockViewModelBuilder, IBreadcrumbViewModelBuilder breadcrumbViewModelBuilder)
+        public BasePageApiModelFilter(IContentLoader contentLoader, ISEOManager seoManager, IBlockViewModelBuilder blockViewModelBuilder,
+            IBreadcrumbViewModelBuilder breadcrumbViewModelBuilder, IPageViewModelBuilder pageViewModelBuilder)
         {
             _contentLoader = contentLoader;
             _blockViewModelBuilder = blockViewModelBuilder;
             _seoManager = seoManager;
             _breadcrumbViewModelBuilder = breadcrumbViewModelBuilder;
+            _pageViewModelBuilder = pageViewModelBuilder;
         }
 
         public override void Filter(ContentApiModel contentApiModel, ConverterContext converterContext) { }
