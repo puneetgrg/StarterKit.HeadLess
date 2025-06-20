@@ -30,7 +30,7 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Bootstrapper
             //Builders
             _services.AddSingleton<IDisplayViewModelBuilder, DisplayViewModelBuilder>();
             _services.AddSingleton<IBlockViewModelBuilder, BlockViewModelBuilder>();
-
+            _services.AddSingleton<IBreadcrumbViewModelBuilder, BreadcrumbViewModelBuilder>();
             //Managers
             _services.AddSingleton<ISEOManager, SEOManager>();
         }

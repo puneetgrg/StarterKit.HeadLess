@@ -18,8 +18,9 @@ namespace StarterKit.HeadLess.Web.Filters.Pages
         private readonly IDisplayViewModelBuilder _displayViewModelBuilder;
         private static readonly EPiServer.Logging.ILogger _logger = LogManager.GetLogger(typeof(StartPageApiModelFilter));
 
-        public StartPageApiModelFilter(IContentLoader contentLoader, ISEOManager seoManager, IBlockViewModelBuilder blockViewModelBuilder,/* IPageViewModelBuilder pageViewModelBuilder, */IDisplayViewModelBuilder displayViewModelBuilder) :
-            base(contentLoader, seoManager, blockViewModelBuilder)
+        public StartPageApiModelFilter(IContentLoader contentLoader, ISEOManager seoManager, IBlockViewModelBuilder blockViewModelBuilder,
+            IDisplayViewModelBuilder displayViewModelBuilder , IBreadcrumbViewModelBuilder breadcrumbViewModelBuilder) :
+            base(contentLoader, seoManager, blockViewModelBuilder , breadcrumbViewModelBuilder)
         {
             _contentLoader = contentLoader;
             _displayViewModelBuilder = displayViewModelBuilder;
@@ -40,7 +41,7 @@ namespace StarterKit.HeadLess.Web.Filters.Pages
                 var backgroundImage = _displayViewModelBuilder.GetImage(startPage.BackgroundImage);
 
                 //AddSeoMetaData(startPage, contentApiModel);
-                //AddBreadcrumbs(startPage, contentApiModel);
+                AddBreadcrumbs(startPage, contentApiModel);
                 //AddHeader(contentApiModel);
                 //AddFooter(startPage, contentApiModel);
                 //AddQuickLinks(contentApiModel);

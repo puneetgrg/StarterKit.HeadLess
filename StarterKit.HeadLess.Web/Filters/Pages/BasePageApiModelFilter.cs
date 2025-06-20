@@ -17,17 +17,17 @@ namespace StarterKit.HeadLess.Web.Filters.Pages
         private readonly IContentLoader _contentLoader;
         private readonly ISEOManager _seoManager;
         private readonly IBlockViewModelBuilder _blockViewModelBuilder;
-        //private readonly IBreadcrumbViewModelBuilder _breadcrumbViewModelBuilder;
-    
+        private readonly IBreadcrumbViewModelBuilder _breadcrumbViewModelBuilder;
+
         //private readonly IPageViewModelBuilder _pageViewModelBuilder;
         //private readonly IFormsViewModelBuilder _formsViewModelBuilder;
 
-        public BasePageApiModelFilter(IContentLoader contentLoader, ISEOManager seoManager, IBlockViewModelBuilder blockViewModelBuilder )
+        public BasePageApiModelFilter(IContentLoader contentLoader, ISEOManager seoManager, IBlockViewModelBuilder blockViewModelBuilder, IBreadcrumbViewModelBuilder breadcrumbViewModelBuilder)
         {
             _contentLoader = contentLoader;
             _blockViewModelBuilder = blockViewModelBuilder;
             _seoManager = seoManager;
-    
+            _breadcrumbViewModelBuilder = breadcrumbViewModelBuilder;
         }
 
         public override void Filter(ContentApiModel contentApiModel, ConverterContext converterContext) { }
@@ -77,69 +77,69 @@ namespace StarterKit.HeadLess.Web.Filters.Pages
             };
         }
 
+        public void AddBreadcrumbs(PageData pageData, ContentApiModel contentApiModel)
+        {
+            var breadcrumbs = _breadcrumbViewModelBuilder.GenerateBreadcrumbs(pageData);
+            contentApiModel.Properties.Add(nameof(breadcrumbs), breadcrumbs.Breadcrumbs);
+        }
+    //public void AddSeoMetaData(PageData pageData, ContentApiModel contentApiModel)
+    //{
+    //    contentApiModel.Properties.Add("htmlLanguage", pageData.Language.Name);
 
-        //public void AddSeoMetaData(PageData pageData, ContentApiModel contentApiModel)
-        //{
-        //    contentApiModel.Properties.Add("htmlLanguage", pageData.Language.Name);
+    //    //Href Lang
+    //    var hrefLang = _seoManager.CreateHrefLangData(pageData);
+    //    if (!string.IsNullOrEmpty(hrefLang.ToString()))
+    //    {
+    //        contentApiModel.Properties.Add(nameof(hrefLang), hrefLang);
+    //    }
 
-        //    //Href Lang
-        //    var hrefLang = _seoManager.CreateHrefLangData(pageData);
-        //    if (!string.IsNullOrEmpty(hrefLang.ToString()))
-        //    {
-        //        contentApiModel.Properties.Add(nameof(hrefLang), hrefLang);
-        //    }
+    //    //Canonicals
+    //    var canonicals = _seoManager.CreateLowerCaseCanonicalLink(pageData);
+    //    if (!string.IsNullOrEmpty(canonicals.ToString()))
+    //    {
+    //        contentApiModel.Properties.Add(nameof(canonicals), canonicals);
+    //    }
 
-        //    //Canonicals
-        //    var canonicals = _seoManager.CreateLowerCaseCanonicalLink(pageData);
-        //    if (!string.IsNullOrEmpty(canonicals.ToString()))
-        //    {
-        //        contentApiModel.Properties.Add(nameof(canonicals), canonicals);
-        //    }
+    //    //OGTags
+    //    var ogTags = _seoManager.CreateOgTags(pageData);
+    //    if (!string.IsNullOrEmpty(ogTags.ToString()))
+    //    {
+    //        contentApiModel.Properties.Add(nameof(ogTags), ogTags);
+    //    }
 
-        //    //OGTags
-        //    var ogTags = _seoManager.CreateOgTags(pageData);
-        //    if (!string.IsNullOrEmpty(ogTags.ToString()))
-        //    {
-        //        contentApiModel.Properties.Add(nameof(ogTags), ogTags);
-        //    }
+    //    //RobotsTags
+    //    var robotsTag = _seoManager.CreateRobotsTag(pageData);
+    //    if (!string.IsNullOrEmpty(robotsTag.ToString()))
+    //    {
+    //        contentApiModel.Properties.Add(nameof(robotsTag), robotsTag);
+    //    }
 
-        //    //RobotsTags
-        //    var robotsTag = _seoManager.CreateRobotsTag(pageData);
-        //    if (!string.IsNullOrEmpty(robotsTag.ToString()))
-        //    {
-        //        contentApiModel.Properties.Add(nameof(robotsTag), robotsTag);
-        //    }
+    //    //MetaTags
+    //    var metaTags = _seoManager.CreateMetaTags(pageData);
+    //    if (!string.IsNullOrEmpty(metaTags.ToString()))
+    //    {
+    //        contentApiModel.Properties.Add(nameof(metaTags), metaTags);
+    //    }
+    //}
 
-        //    //MetaTags
-        //    var metaTags = _seoManager.CreateMetaTags(pageData);
-        //    if (!string.IsNullOrEmpty(metaTags.ToString()))
-        //    {
-        //        contentApiModel.Properties.Add(nameof(metaTags), metaTags);
-        //    }
-        //}
 
-        //public void AddBreadcrumbs(PageData pageData, ContentApiModel contentApiModel)
-        //{
-        //    var breadcrumbs = _breadcrumbViewModelBuilder.GenerateBreadcrumbs(pageData);
-        //    contentApiModel.Properties.Add(nameof(breadcrumbs), breadcrumbs.Breadcrumbs);
-        //}
 
-        //public void AddFooter(PageData pageData, ContentApiModel contentApiModel)
-        //{
-        //    var footer = _pageViewModelBuilder.GetFooterViewModel(pageData);
-        //    contentApiModel.Properties.Add(nameof(footer), footer);
-        //}
+    //public void AddFooter(PageData pageData, ContentApiModel contentApiModel)
+    //{
+    //    var footer = _pageViewModelBuilder.GetFooterViewModel(pageData);
+    //    contentApiModel.Properties.Add(nameof(footer), footer);
+    //}
 
-        //public void AddQuickLinks(ContentApiModel contentApiModel)
-        //{
-        //    var quickLinks = _pageViewModelBuilder.GetQuickLinksViewModel();
-        //    contentApiModel.Properties.Add(nameof(quickLinks), quickLinks);
-        //}
+    //public void AddQuickLinks(ContentApiModel contentApiModel)
+    //{
+    //    var quickLinks = _pageViewModelBuilder.GetQuickLinksViewModel();
+    //    contentApiModel.Properties.Add(nameof(quickLinks), quickLinks);
+    //}
 
-        //public void AddHeader(ContentApiModel contentApiModel)
-        //{
-        //    var header = _pageViewModelBuilder.GetHeaderViewModel();
-        //    contentApiModel.Properties.Add(nameof(header), header);
-        //}
-    }
+    //public void AddHeader(ContentApiModel contentApiModel)
+    //{
+    //    var header = _pageViewModelBuilder.GetHeaderViewModel();
+    //    contentApiModel.Properties.Add(nameof(header), header);
+    //}
+}
 }
