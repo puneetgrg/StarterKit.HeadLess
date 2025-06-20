@@ -5,6 +5,7 @@ using EPiServer.Shell.ObjectEditing;
 using EPiServer.SpecializedProperties;
 using EPiServer.Web;
 using Newtonsoft.Json;
+using StarterKit.HeadLess.CMS.Implemenation.Infrastructure.Editor.SelectionFactory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,14 +28,14 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Models.Blocks
         public virtual LinkItemCollection Link { get; set; }
 
         [ScaffoldColumn(false)]
-        //[SelectOne(SelectionFactoryType = typeof(ButtonStyleSelectionFactory))]
+        [SelectOne(SelectionFactoryType = typeof(ButtonStyleSelectionFactory))]
         [Display(Name = "Style", Description = "Choose a predefined style for the button based on the style guide", GroupName = SystemTabNames.Content, Order = 20)]
         public virtual string Style { get; set; }
 
         [CultureSpecific]
         [Display(Name = "CTA Icon Alignment", Description = "",
             GroupName = SystemTabNames.Content, Order = 30)]
-        //[SelectOne(SelectionFactoryType = typeof(AlignmentSelectionFactory))]
+        [SelectOne(SelectionFactoryType = typeof(AlignmentSelectionFactory))]
         public virtual string Alignment { get; set; }
 
         [JsonIgnore]
