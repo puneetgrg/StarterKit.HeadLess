@@ -6,4 +6,12 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="EPiServer.CMS" Version="12.29.0" />
+		<PackageReference Include="EPiServer.Framework" Version="12.21.4" />
+		<PackageReference Include="EPiServer.CMS.AspNetCore.Routing" Version="12.21.4" />
+		<PackageReference Include=" EPiServer.CMS.UI.Core" Version="12.31.1" />
+
+	</ItemGroup>
+	
 </Project>

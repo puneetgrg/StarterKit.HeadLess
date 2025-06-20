@@ -1,6 +1,8 @@
 ﻿using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
+using EPiServer.Web;
+using StarterKit.HeadLess.CMS.Implemenation.Models.Blocks;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,18 +14,17 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Models.Pages
 {
     [ContentType(DisplayName = "Start Page", GUID = "2DBD2887-EAAF-4477-8873-73A9E0BA93EE", Description = "Start page for the Healdess website", GroupName = SystemTabNames.Content)]//Name TBD, Icon TBD
    
-    public class StartPage : PageData
+    public class StartPage : HeadlessBasePageData
     {
+        [UIHint(UIHint.Image)]
+        [Display(Name = "Background Image",
+            Description = "",
+            GroupName = SystemTabNames.Content,
+            Order = 40)]
+        public override ContentReference BackgroundImage { get; set; }
 
-        [ScaffoldColumn(false)]
-        public virtual string Title { get; set; }
-
-        [CultureSpecific]
-        [Display(Name = "Main body", GroupName = SystemTabNames.Content, Order = 100)]
-        public virtual XhtmlString MainBody { get; set; }
-
-        [CultureSpecific]
-        [Display(Name = "Main content area", GroupName = SystemTabNames.Content, Order = 190)]
-        public virtual ContentArea MainContentarea { get; set; }
+        [Ignore]
+        public override ContentArea TopContentArea { get; set; }
+       
     }
 }

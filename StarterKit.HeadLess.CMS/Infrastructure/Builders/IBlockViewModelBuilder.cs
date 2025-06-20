@@ -11,5 +11,6 @@ namespace StarterKit.HeadLess.CMS.Infrastructure.Builders
     public interface IBlockViewModelBuilder
     {
         ICallToActionViewModel GetCallToActionViewModel(BlockData blockData);
+        IPageBannerViewModel GetPageBannerViewModel(BlockData blockData);
     }
 }

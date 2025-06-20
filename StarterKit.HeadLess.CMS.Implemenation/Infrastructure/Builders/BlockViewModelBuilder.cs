@@ -6,11 +6,13 @@ using StarterKit.HeadLess.CMS.Implemenation.Models.Blocks;
 using StarterKit.HeadLess.CMS.Implemenation.Models.Viewmodels;
 using StarterKit.HeadLess.CMS.Infrastructure.Builders;
 using StarterKit.HeadLess.CMS.Infrastructure.Iterfaces;
+using StarterKit.HeadLess.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static StarterKit.HeadLess.CMS.Implemenation.Models.Constant;
 
 namespace StarterKit.HeadLess.CMS.Implemenation.Infrastructure.Builders
 {
@@ -47,6 +49,39 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Infrastructure.Builders
                 ImageData = _displayViewModelBuilder.GetImage(callToActionBlock.Icon)
             };
         }
+        public IPageBannerViewModel GetPageBannerViewModel(BlockData blockData)
+        {
+            if (blockData is not PageBannerBlock pageBannerBlock)
+                return null;
+
+            var viewModel = new PageBannerViewModel(pageBannerBlock)
+            {
+                Eyebrow = pageBannerBlock.Eyebrow,
+                Headline = pageBannerBlock.Headline,
+                Description = XhtmlHelper.ResolveUrls(pageBannerBlock.Description),
+            };
+
+            viewModel.CtaButtons = new List<ICallToActionViewModel>();
+
+            var primaryButton = GetCallToActionViewModel(pageBannerBlock.Cta1) as CallToActionViewModel;
+
+            if (primaryButton != null)
+            {
+                primaryButton.CtaType = ButtonStyleClasses.PrimaryButton;
+                viewModel.CtaButtons.Add(primaryButton);
+            }
+
+            var tertiaryButton = GetCallToActionViewModel(pageBannerBlock.Cta2) as CallToActionViewModel;
+
+            if (tertiaryButton != null)
+            {
+                tertiaryButton.CtaType = ButtonStyleClasses.TertiaryButton;
+                viewModel.CtaButtons.Add(tertiaryButton);
+            }
+
+            return viewModel;
+        }
+
 
     }
 }
