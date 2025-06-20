@@ -20,9 +20,9 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Bootstrapper
         {
             var _services = context.Services;
 
-            //Filters
+            //API Filters
+            _services.AddSingleton<IContentFilter, PreSerializationContentFilter>();
             _services.AddSingleton<IContentApiModelFilter, PostSerializationApiModelFilter>();
-            //_services.AddSingleton<IContentApiModelFilter, StartPageApiModelFilter>();
 
             //Convertor
             _services.AddSingleton<IContentConverterProvider, CustomContentConverterProvider>();
@@ -31,6 +31,7 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Bootstrapper
             _services.AddSingleton<IDisplayViewModelBuilder, DisplayViewModelBuilder>();
             _services.AddSingleton<IBlockViewModelBuilder, BlockViewModelBuilder>();
             _services.AddSingleton<IBreadcrumbViewModelBuilder, BreadcrumbViewModelBuilder>();
+            _services.AddSingleton<IPageViewModelBuilder, PageViewModelBuilder>();
             //Managers
             _services.AddSingleton<ISEOManager, SEOManager>();
         }
