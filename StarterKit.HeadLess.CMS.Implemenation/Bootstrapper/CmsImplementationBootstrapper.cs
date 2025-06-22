@@ -9,6 +9,8 @@ using StarterKit.HeadLess.CMS.Implemenation.Infrastructure.Serialization;
 using StarterKit.HeadLess.CMS.Implemenation.Infrastructure.Builders;
 using StarterKit.HeadLess.CMS.Infrastructure.Managers;
 using StarterKit.HeadLess.CMS.Implemenation.Infrastructure.Managers;
+using StarterKit.HeadLess.CMS.Implemenation.Infrastructure.Conventions;
+using StarterKit.HeadLess.CMS.Infrastructure.Conventions;
 
 namespace StarterKit.HeadLess.CMS.Implemenation.Bootstrapper
 {
@@ -34,6 +36,10 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Bootstrapper
             _services.AddSingleton<IPageViewModelBuilder, PageViewModelBuilder>();
             //Managers
             _services.AddSingleton<ISEOManager, SEOManager>();
+
+            //Indexing Convention
+            _services.AddSingleton<IConventionManager, ConventionManager>();
+            _services.AddSingleton<IIndexingConvention, ContentIndexingConvention>();
         }
 
         public void Initialize(InitializationEngine context)
