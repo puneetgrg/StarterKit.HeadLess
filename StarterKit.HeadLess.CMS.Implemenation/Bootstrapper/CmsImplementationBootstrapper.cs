@@ -38,6 +38,7 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Bootstrapper
             _services.AddSingleton<IPageViewModelBuilder, PageViewModelBuilder>();
             //Managers
             _services.AddSingleton<ISEOManager, SEOManager>();
+            _services.AddSingleton<IHeadlessSearchManager, HeadlessSearchManager>();
 
             //Indexing Convention
             _services.AddSingleton<IConventionManager, ConventionManager>();

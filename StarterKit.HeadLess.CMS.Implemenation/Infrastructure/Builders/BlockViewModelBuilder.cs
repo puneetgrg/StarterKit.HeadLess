@@ -1,18 +1,23 @@
 ﻿using AddOn.Episerver.Settings.Core;
 using EPiServer;
 using EPiServer.Core;
+using EPiServer.Framework.Localization;
 using EPiServer.SpecializedProperties;
 using EPiServer.Web;
 using EPiServer.Web.Routing;
 using Geta.Optimizely.Categories;
 using StarterKit.HeadLess.CMS.Implemenation.Models.Blocks;
 using StarterKit.HeadLess.CMS.Implemenation.Models.Categories;
+using StarterKit.HeadLess.CMS.Implemenation.Models.Pages;
+using StarterKit.HeadLess.CMS.Implemenation.Models.Search;
 using StarterKit.HeadLess.CMS.Implemenation.Models.Viewmodels;
 using StarterKit.HeadLess.CMS.Implemenation.Models.Viewmodels.Properties;
 using StarterKit.HeadLess.CMS.Infrastructure.Builders;
 using StarterKit.HeadLess.CMS.Infrastructure.Iterfaces;
+using StarterKit.HeadLess.CMS.Infrastructure.Iterfaces.Search;
 using StarterKit.HeadLess.Core.Extensions;
 using StarterKit.HeadLess.Core.Features.Settings;
+using StarterKit.HeadLess.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -129,6 +134,67 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Infrastructure.Builders
                 })
                 .Where(vm => vm != null)
                 .Cast<ICategoryTagViewModel>();
+        }
+        public ISearchResultTileViewModel GetSearchResultTile(PageData pageData, string language = "en", string trackingId = "")
+        {
+            if (pageData is not HeadlessBasePageData headlessBasePageData)
+                return new SearchResultTileViewModel();
+
+            //adding the option to force a url in specific culture
+            var urlResolverArguments = new UrlResolverArguments
+            {
+                ContextMode = ContextMode.Default,
+                ForceAbsolute = false
+            };
+
+            var learnMore = new CallToActionViewModel()
+            {
+                CtaLabel = "LearnMore",
+                CtaAriaLabel = "LearnMoreAriaLabel",
+                CtaUrl = string.IsNullOrEmpty(language) ? _urlResolver.GetUrl(headlessBasePageData) : _urlResolver.GetUrl(headlessBasePageData.ContentLink, language, urlResolverArguments),
+                CtaTarget = "_self"
+            };
+
+            //We're getting ShortDescription via Property because it's not defined on the HeadlessBasePageData. 
+            //Some pages have it while others don't
+            string shortDescription = pageData.Property["ShortDescription"]?.Value?.ToString() ?? headlessBasePageData.Summary ?? string.Empty;
+
+            return new SearchResultTileViewModel
+            {
+                Title = headlessBasePageData.Title,
+                ShortDescription = shortDescription,
+                Thumbnail = _displayViewModelBuilder.GetImage(headlessBasePageData.Thumbnail),
+                Cta = learnMore,
+                TrackingId = trackingId
+            };
+        }
+        public IBlogArticleCardSubViewModel GetBlogArticleCardSubViewModel(PageData pageData, string language = "", string trackingId = "")
+        {
+            if (pageData is not BlogArticlePage blogArticlePage)
+                return null;
+
+            //adding the option to force a url in specific culture
+            var urlResolverArguments = new UrlResolverArguments
+            {
+                ContextMode = ContextMode.Default,
+                ForceAbsolute = false
+            };
+
+            return new BlogArticleCardSubViewModel(blogArticlePage)
+            {
+                Title = blogArticlePage.Title,
+                TitleUrl = string.IsNullOrEmpty(language) ? _urlResolver.GetUrl(pageData.ContentLink) : _urlResolver.GetUrl(pageData.ContentLink, language, urlResolverArguments),
+                ShortDescription = blogArticlePage.ShortDescription,
+                ImageData = blogArticlePage.Thumbnail != null
+                    ? _displayViewModelBuilder.GetImage(blogArticlePage.Thumbnail) as ImageModel
+                    : null,
+                ShowCategory = true,
+                Categories = GetBlogCategoryTagViewModel(blogArticlePage.Categories?.ToList(), language),
+                ReadTime = blogArticlePage.ReadTime == 0
+                ? blogArticlePage.ReadTime.ToString()
+                : string.Format("ReadTime {0}").Replace("{0}", blogArticlePage.ReadTime.ToString()),
+                TrackingId = trackingId
+            };
         }
 
 
