@@ -11,6 +11,7 @@ using StarterKit.HeadLess.CMS.Infrastructure.Managers;
 using StarterKit.HeadLess.CMS.Implemenation.Infrastructure.Managers;
 using StarterKit.HeadLess.CMS.Implemenation.Infrastructure.Conventions;
 using StarterKit.HeadLess.CMS.Infrastructure.Conventions;
+using StarterKit.HeadLess.CMS.Infrastructure.Iterfaces;
 
 namespace StarterKit.HeadLess.CMS.Implemenation.Bootstrapper
 {
@@ -21,6 +22,8 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Bootstrapper
         public void ConfigureContainer(ServiceConfigurationContext context)
         {
             var _services = context.Services;
+
+            _services.AddSingleton<IHeadlessSiteSettingsManager, HeadlessSiteSettingsManager>();
 
             //API Filters
             _services.AddSingleton<IContentFilter, PreSerializationContentFilter>();
