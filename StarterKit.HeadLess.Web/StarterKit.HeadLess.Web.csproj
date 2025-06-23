@@ -27,4 +27,8 @@
   <ItemGroup>
     <ProjectReference Include="..\StarterKit.HeadLess.CMS.Implemenation\StarterKit.HeadLess.CMS.Implemenation.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Infrastructure\Cms\" />
+  </ItemGroup>
 </Project>

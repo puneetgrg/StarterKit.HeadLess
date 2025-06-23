@@ -23,7 +23,6 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Bootstrapper
         {
             var _services = context.Services;
 
-            _services.AddSingleton<IHeadlessSiteSettingsManager, HeadlessSiteSettingsManager>();
 
             //API Filters
             _services.AddSingleton<IContentFilter, PreSerializationContentFilter>();
