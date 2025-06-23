@@ -1,3 +1,4 @@
+using EPiServer.Authorization;
 using EPiServer.Cms.Shell;
 using EPiServer.Cms.UI.AspNetIdentity;
 using EPiServer.ContentApi.Core.DependencyInjection;
@@ -8,6 +9,8 @@ using EPiServer.Web.Routing;
 using Geta.Optimizely.Categories.Configuration;
 using Geta.Optimizely.Categories.Find.Infrastructure.Initialization;
 using Geta.Optimizely.Categories.Infrastructure.Initialization;
+using Geta.Optimizely.Tags.Infrastructure.Configuration;
+using Geta.Optimizely.Tags.Infrastructure.Initialization;
 
 namespace StarterKit.HeadLess.Web
 {
@@ -36,8 +39,10 @@ namespace StarterKit.HeadLess.Web
                 .AddAdminUserRegistration()
                 .AddEmbeddedLocalization<Startup>();
 
+      
             //Geta
             services.AddGetaCategories();
+            services.AddGetaTags(policy => policy.RequireRole(Roles.WebAdmins));
 
             services.AddContentSearchApi(options => {
                 options.MaximumSearchResults = 10;
@@ -71,6 +76,11 @@ namespace StarterKit.HeadLess.Web
             app.UseStaticFiles();
             app.UseRouting();
 
+            app.UseGetaCategories();
+            app.UseGetaCategoriesFind();
+            app.UseGetaTags();
+
+
             //Allow Cross origin for the headless app
             var previewUrl = _configuration.GetValue<string>("ContentDeliveryApi:ExternalApplicationUrl");
             if (!string.IsNullOrEmpty(previewUrl))
@@ -81,9 +91,6 @@ namespace StarterKit.HeadLess.Web
             {
                 app.UseCors();
             }
-
-            app.UseGetaCategories();
-            app.UseGetaCategoriesFind();
             
 
             app.UseAuthentication();

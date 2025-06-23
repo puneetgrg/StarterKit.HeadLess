@@ -17,6 +17,9 @@
     <PackageReference Include="EPiServer.Framework" Version="12.21.4" />
     <PackageReference Include="EPiServer.CMS.AspNetCore.Routing" Version="12.21.4" />
 	  <PackageReference Include=" EPiServer.CMS.UI.Core" Version="12.31.1" />
+	  <PackageReference Include="Geta.Optimizely.Categories" Version="1.1.3" />
+	  <PackageReference Include="Geta.Optimizely.Categories.Find" Version="1.1.3" />
+	  <PackageReference Include="Geta.Optimizely.Tags" Version="2.0.9" />
 	  
   </ItemGroup>
   
