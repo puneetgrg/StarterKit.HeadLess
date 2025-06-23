@@ -10,8 +10,4 @@
     <ProjectReference Include="..\StarterKit.HeadLess.CMS\StarterKit.HeadLess.CMS.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\SiteSettings\" />
-  </ItemGroup>
-
 </Project>

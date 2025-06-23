@@ -17,6 +17,15 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Infrastructure.Conventions
 
             return builder;
         }
-        
+        //public static TypeConventionBuilder<BlogArticlePage> ApplyFieldConventions(this TypeConventionBuilder<BlogArticlePage> builder)
+        //{
+        //    builder.ExcludeField(i => i.ReadTime);
+
+        //    builder.IncludeField(i => i.ReadTime());
+        //    builder.IncludeField(i => i.StartPublish);
+
+        //    return builder;
+        //}
+
     }
 }

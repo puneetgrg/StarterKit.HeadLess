@@ -12,5 +12,6 @@ namespace StarterKit.HeadLess.CMS.Infrastructure.Builders
     {
         ICallToActionViewModel GetCallToActionViewModel(BlockData blockData);
         IPageBannerViewModel GetPageBannerViewModel(BlockData blockData);
+        IEnumerable<ICategoryTagViewModel> GetBlogCategoryTagViewModel(IList<ContentReference> categories, string language = "");
     }
 }

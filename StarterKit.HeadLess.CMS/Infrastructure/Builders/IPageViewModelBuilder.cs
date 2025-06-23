@@ -6,5 +6,6 @@ namespace StarterKit.HeadLess.CMS.Infrastructure.Builders
     public interface IPageViewModelBuilder
     {
         IContentPageViewModel GetContentPageViewModel(PageData pageData);
+        IBlogArticlePageViewModel GetBlogArticlePageViewModel(PageData pageData);
     }
 }

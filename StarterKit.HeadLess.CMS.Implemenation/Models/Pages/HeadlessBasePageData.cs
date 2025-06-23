@@ -2,6 +2,9 @@
 using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
 using EPiServer.Web;
+using Geta.Optimizely.Categories.DataAnnotations;
+using Geta.Optimizely.Tags.Core.Attributes;
+using StarterKit.HeadLess.CMS.Implemenation.Models.Categories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -39,11 +42,11 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Models.Pages
             Order = 40)]
         public virtual ContentReference BackgroundImage { get; set; }
 
-        //[UIHint("Tags")]
-        //[CultureSpecific]
-        //[GetaTags(AllowSpaces = true, AllowDuplicates = false, CaseSensitive = false)]
-        //[Display(Name = "Tags", GroupName = SystemTabNames.Content, Order = 50)]
-        //public virtual string Tags { get; set; }
+        [UIHint("Tags")]
+        [CultureSpecific]
+        [GetaTags(AllowSpaces = true, AllowDuplicates = false, CaseSensitive = false)]
+        [Display(Name = "Tags", GroupName = SystemTabNames.Content, Order = 50)]
+        public virtual string Tags { get; set; }
 
         [CultureSpecific]
         [Display(Name = "Top content area", GroupName = SystemTabNames.Content, Order = 190)]
@@ -57,10 +60,10 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Models.Pages
         [Display(Name = "Bottom content area", GroupName = SystemTabNames.Content, Order = 210)]
         public virtual ContentArea BottomContentArea { get; set; }
 
-        //[Categories]
-        //[AllowedTypes(typeof(HeadlessBaseCategoryData))]
-        //[Display(GroupName = SystemTabNames.PageHeader, Order = 40)]
-        //public virtual IList<ContentReference> Categories { get; set; }
+        [Categories]
+        [AllowedTypes(typeof(HeadlessBaseCategoryData))]
+        [Display(GroupName = SystemTabNames.PageHeader, Order = 40)]
+        public virtual IList<ContentReference> Categories { get; set; }
 
         #endregion
 

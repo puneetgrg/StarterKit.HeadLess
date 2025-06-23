@@ -56,12 +56,12 @@ namespace StarterKit.HeadLess.Core.Features.Settings
         //    Order = 40)]
         //public virtual LinkItem ShopLink { get; set; }
 
-        //[CultureSpecific]
-        //[Display(Name = "Search Page Link", Description = "",
-        //    GroupName = PropertyGroupNames.Header,
-        //    Order = 50)]
+        [CultureSpecific]
+        [Display(Name = "Search Page Link", Description = "",
+            GroupName = "Header",
+            Order = 50)]
         //[AllowedTypes(typeof(HeadlessSearchPage))]
-        //public virtual ContentReference SearchPage { get; set; }
+        public virtual ContentReference SearchPage { get; set; }
 
         //[CultureSpecific]
         //[Display(Name = "Quick Links Items (Search)", Description = "", GroupName = PropertyGroupNames.Header,

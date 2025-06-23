@@ -11,14 +11,12 @@ namespace StarterKit.HeadLess.CMS.Implemenation.Infrastructure.Conventions
         public void Apply(IConventionManager conventionManager, IClientConventions clientConventions)
         {
             clientConventions.ForInstancesOf<HeadlessBasePageData>().ApplyFieldConventions();
+            //clientConventions.ForInstancesOf<BlogArticlePage>().ApplyFieldConventions();
 
             //Exclude
             conventionManager.ExcludeType<StartPage>();
             //conventionManager.ExcludeType<HeadlessSearchPage>();
             //conventionManager.ExcludeType<BlogListingPage>();
-            //conventionManager.ExcludeType<ProductListingPage>();
-            //conventionManager.ExcludeType<SubProductListingPage>();
-            //conventionManager.ExcludeType<JobListingPage>();
             //conventionManager.ExcludeType<ErrorPage>();
             //Add Error Pages here
             conventionManager.ExcludeType<CallToActionButtonBlock>();
