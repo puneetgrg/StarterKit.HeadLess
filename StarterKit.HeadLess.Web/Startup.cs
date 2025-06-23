@@ -5,6 +5,9 @@ using EPiServer.Scheduler;
 using EPiServer.ServiceLocation;
 using EPiServer.Web;
 using EPiServer.Web.Routing;
+using Geta.Optimizely.Categories.Configuration;
+using Geta.Optimizely.Categories.Find.Infrastructure.Initialization;
+using Geta.Optimizely.Categories.Infrastructure.Initialization;
 
 namespace StarterKit.HeadLess.Web
 {
@@ -32,6 +35,9 @@ namespace StarterKit.HeadLess.Web
                 .AddCms()
                 .AddAdminUserRegistration()
                 .AddEmbeddedLocalization<Startup>();
+
+            //Geta
+            services.AddGetaCategories();
 
             services.AddContentSearchApi(options => {
                 options.MaximumSearchResults = 10;
@@ -76,6 +82,9 @@ namespace StarterKit.HeadLess.Web
                 app.UseCors();
             }
 
+            app.UseGetaCategories();
+            app.UseGetaCategoriesFind();
+            
 
             app.UseAuthentication();
             app.UseAuthorization();
